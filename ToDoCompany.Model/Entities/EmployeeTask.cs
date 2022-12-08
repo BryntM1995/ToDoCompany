@@ -6,7 +6,7 @@ using System.Text;
 
 namespace ToDoCompany.Model.Entities
 {
-    internal class EmployeeTask
+    public class EmployeeTask
     {
         [Key]
         public int TaskId { get; set; }
@@ -17,9 +17,6 @@ namespace ToDoCompany.Model.Entities
         public string TaskDescription { get; set; }
         public bool IsDeleted { get; set; }
 
-        public EmployeeTask()
-        {
-
-        }
+       
     }
 }

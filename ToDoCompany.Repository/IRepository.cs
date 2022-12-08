@@ -4,13 +4,13 @@ using ToDoCompany.Core;
 
 namespace ToDoCompany.Repository
 {
-    public interface IRepository<T>
+    public interface IRepository<Entity>
     {
-        IOperationResult Add(T entity);
-        IOperationResult Update(T entity);
-        IOperationResult Remove(int key);
-        T GetById(int key);
-        IQueryable<T> GetAll();
+        void Add(Entity entity);
+        void Update(Entity entity);
+        bool Remove(int key);
+        Entity GetById(int key);
+        IQueryable<Entity> GetAll();
         public bool Commit();
     }
 }

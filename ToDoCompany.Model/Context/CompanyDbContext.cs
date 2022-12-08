@@ -8,7 +8,7 @@ namespace ToDoCompany.Model.Context
 {
     internal class CompanyDbContext : DbContext
     {
-        public DbSet<Employee> Employee { get; set; }
+        public DbSet<EmployeeTask> Employee { get; set; }
         public DbSet<EmployeeTask> EmployeeTask { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -16,7 +16,7 @@ namespace ToDoCompany.Model.Context
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Employee>()
+            modelBuilder.Entity<EmployeeTask>()
                 .HasMany<EmployeeTask>()
                 .WithOne(x => x.Employee)
                 .OnDelete(DeleteBehavior.Cascade);
