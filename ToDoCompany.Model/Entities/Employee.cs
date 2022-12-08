@@ -14,7 +14,7 @@ namespace ToDoCompany.Model.Entities
         public string EmployeePhone { get; set; }
         public int EmployeeAge { get; set; }
         public bool IsDeleted { get; set; }
-        public virtual ICollection<Task> Tasks { get; set; }
+        public virtual ICollection<EmployeeTask> Tasks { get; set; }
         public Employee()
         {
 
