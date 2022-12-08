@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ToDoCompany.Model.Entities
 {
-    internal class Employee
+    public class EmployeeTask
     {
         [Key]
         public int EmployeeID { get; set; }
@@ -14,8 +14,8 @@ namespace ToDoCompany.Model.Entities
         public string EmployeePhone { get; set; }
         public int EmployeeAge { get; set; }
         public bool IsDeleted { get; set; }
-        public virtual ICollection<Task> Tasks { get; set; }
-        public Employee()
+        public virtual ICollection<EmployeeTask> Tasks { get; set; }
+        public EmployeeTask()
         {
 
         }
