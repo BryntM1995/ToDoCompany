@@ -12,6 +12,10 @@ namespace ToDoCompany.Model.Context
         public CompanyDbContext(DbContextOptions options) : base(options)
         {
         }
+        public CompanyDbContext()
+        {
+
+        }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Employee>()
