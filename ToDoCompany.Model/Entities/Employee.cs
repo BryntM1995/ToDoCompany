@@ -6,16 +6,13 @@ using System.Threading.Tasks;
 
 namespace ToDoCompany.Model.Entities
 {
-    public class EmployeeTask
+    public class Employee : BaseEntity
     {
-        [Key]
-        public int EmployeeID { get; set; }
         public string EmployeeName { get; set; }
         public string EmployeePhone { get; set; }
         public int EmployeeAge { get; set; }
-        public bool IsDeleted { get; set; }
         public virtual ICollection<EmployeeTask> Tasks { get; set; }
-        public EmployeeTask()
+        public Employee()
         {
 
         }

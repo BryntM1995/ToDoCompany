@@ -9,8 +9,8 @@ using ToDoCompany.Model.Context;
 namespace ToDoCompany.Model.Migrations
 {
     [DbContext(typeof(CompanyDbContext))]
-    [Migration("20221208151605_initials")]
-    partial class initials
+    [Migration("20221227233153_initialv1")]
+    partial class initialv1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -21,7 +21,7 @@ namespace ToDoCompany.Model.Migrations
 
             modelBuilder.Entity("ToDoCompany.Model.Entities.Employee", b =>
                 {
-                    b.Property<int>("EmployeeID")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
@@ -37,18 +37,18 @@ namespace ToDoCompany.Model.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("tinyint(1)");
 
-                    b.HasKey("EmployeeID");
+                    b.HasKey("Id");
 
                     b.ToTable("Employee");
                 });
 
             modelBuilder.Entity("ToDoCompany.Model.Entities.EmployeeTask", b =>
                 {
-                    b.Property<int>("TaskId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int?>("EmployeeID")
+                    b.Property<int?>("EmployeeId")
                         .HasColumnType("int");
 
                     b.Property<int>("EmployeeIdInTask")
@@ -63,9 +63,9 @@ namespace ToDoCompany.Model.Migrations
                     b.Property<string>("TaskName")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.HasKey("TaskId");
+                    b.HasKey("Id");
 
-                    b.HasIndex("EmployeeID");
+                    b.HasIndex("EmployeeId");
 
                     b.HasIndex("EmployeeIdInTask");
 
@@ -76,7 +76,7 @@ namespace ToDoCompany.Model.Migrations
                 {
                     b.HasOne("ToDoCompany.Model.Entities.Employee", null)
                         .WithMany("Tasks")
-                        .HasForeignKey("EmployeeID");
+                        .HasForeignKey("EmployeeId");
 
                     b.HasOne("ToDoCompany.Model.Entities.Employee", "Employee")
                         .WithMany()

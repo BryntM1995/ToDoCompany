@@ -6,17 +6,17 @@ using System.Text;
 
 namespace ToDoCompany.Model.Entities
 {
-    public class EmployeeTask
+    public class EmployeeTask : BaseEntity
     {
-        [Key]
-        public int TaskId { get; set; }
+        
         public string TaskName { get; set; }
         [ForeignKey("Employee")]
         public int EmployeeIdInTask { get; set; }
         public virtual Employee Employee { get; set; }
         public string TaskDescription { get; set; }
-        public bool IsDeleted { get; set; }
+        public EmployeeTask()
+        {
 
-       
+        }
     }
 }

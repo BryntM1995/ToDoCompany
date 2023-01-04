@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ToDoCompany.Model.Migrations
 {
-    public partial class initials : Migration
+    public partial class initialv1 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -11,51 +11,51 @@ namespace ToDoCompany.Model.Migrations
                 name: "Employee",
                 columns: table => new
                 {
-                    EmployeeID = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    IsDeleted = table.Column<bool>(nullable: false),
                     EmployeeName = table.Column<string>(nullable: true),
                     EmployeePhone = table.Column<string>(nullable: true),
-                    EmployeeAge = table.Column<int>(nullable: false),
-                    IsDeleted = table.Column<bool>(nullable: false)
+                    EmployeeAge = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Employee", x => x.EmployeeID);
+                    table.PrimaryKey("PK_Employee", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
                 name: "EmployeeTask",
                 columns: table => new
                 {
-                    TaskId = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    IsDeleted = table.Column<bool>(nullable: false),
                     TaskName = table.Column<string>(nullable: true),
                     EmployeeIdInTask = table.Column<int>(nullable: false),
                     TaskDescription = table.Column<string>(nullable: true),
-                    IsDeleted = table.Column<bool>(nullable: false),
-                    EmployeeID = table.Column<int>(nullable: true)
+                    EmployeeId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_EmployeeTask", x => x.TaskId);
+                    table.PrimaryKey("PK_EmployeeTask", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_EmployeeTask_Employee_EmployeeID",
-                        column: x => x.EmployeeID,
+                        name: "FK_EmployeeTask_Employee_EmployeeId",
+                        column: x => x.EmployeeId,
                         principalTable: "Employee",
-                        principalColumn: "EmployeeID",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_EmployeeTask_Employee_EmployeeIdInTask",
                         column: x => x.EmployeeIdInTask,
                         principalTable: "Employee",
-                        principalColumn: "EmployeeID",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_EmployeeTask_EmployeeID",
+                name: "IX_EmployeeTask_EmployeeId",
                 table: "EmployeeTask",
-                column: "EmployeeID");
+                column: "EmployeeId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_EmployeeTask_EmployeeIdInTask",
