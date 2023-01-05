@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using ToDoCompany.Core;
 using ToDoCompany.Model;
+using ToDoCompany.Model.Context;
 using ToDoCompany.Model.Entities;
 
 namespace ToDoCompany.Repository
@@ -13,7 +14,7 @@ namespace ToDoCompany.Repository
     public class EmployeeRepository : BaseRepository<Employee>, IEmployeeRepository
     {
        
-        public EmployeeRepository(DbContext dbContext) : base(dbContext)
+        public EmployeeRepository(CompanyDbContext dbContext) : base(dbContext)
         {
            
         }

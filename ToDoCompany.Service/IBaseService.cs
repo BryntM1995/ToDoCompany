@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using FluentValidation;
+using Microsoft.EntityFrameworkCore.Migrations.Operations;
 using System.Collections.Generic;
 using System.Linq;
 using ToDoCompany.Core;
@@ -15,19 +16,19 @@ namespace ToDoCompany.Service
         IOperationResult Update(Entity entity);
         IOperationResult Remove(int key);
         Entity GetById(int key);
-        IQueryable<Entity> GetAll();
+        IEnumerable<Entity> GetAll();
     }
     public class BaseService<Entity, EntityDto> : IBaseService<EntityDto>
         where EntityDto : class, IBaseDto
         where Entity : class, IBaseEntity
     {
-        private readonly AbstractValidator<EntityDto> _validator;
+        private readonly IValidator<EntityDto> _validator;
         private readonly IMapper _mapper;
         protected readonly IBaseRepository<Entity> _repository;
         public BaseService(
             IBaseRepository<Entity> repository,
             IMapper mapper,
-            AbstractValidator<EntityDto> validator)
+            IValidator<EntityDto> validator)
         {
             _repository = repository;
             _mapper = mapper;
@@ -40,7 +41,7 @@ namespace ToDoCompany.Service
             {
                 return new OperationResult
                 {
-                    Messages = result.Errors.Select(x => x.ErrorMessage).ToList(),
+                    Messages = result.Errors.Select(x => x.ErrorMessage)
                 };
             }
 
@@ -59,10 +60,10 @@ namespace ToDoCompany.Service
             return new OperationResult();
         }
 
-        public IQueryable<EntityDto> GetAll()
+        public IEnumerable<EntityDto> GetAll()
         {
-            var Entitydtos = _mapper.Map<IQueryable<EntityDto>>(_repository.GetAll());
-            return Entitydtos;
+            var entitydtos = _mapper.Map<IEnumerable<EntityDto>>(_repository.GetAll());
+            return entitydtos;
         }
 
         public EntityDto GetById(int key)
@@ -93,18 +94,27 @@ namespace ToDoCompany.Service
         public IOperationResult Update(EntityDto dto)
         {
             var result = _validator.Validate(dto);
+            if (!result.IsValid)
+            {
+                return new OperationResult
+                {
+                   Messages = result.Errors.Select(x => x.ErrorMessage)
+                };
+            }
             var entity = _repository.GetById(dto.Id);
-            if (entity == null & !result.IsValid & !_repository.GetAll().Where(x => x.Id == dto.Id).Any())
+            
+            if (entity == null)
             {
                 return
                     new OperationResult
                     {
                         Messages = new List<string>
                         {
-                            "This entity wasn't updated."
+                            "This entity is not found."
                         }
                     };
             }
+            _mapper.Map(dto, entity);
             _repository.Update(entity);
             return new OperationResult();
         }

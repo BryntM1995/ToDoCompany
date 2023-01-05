@@ -13,7 +13,7 @@ namespace ToDoCompany.Service
     public interface IEmployeeTaskService : IBaseService<EmployeeTaskDto> { }
     public class EmployeeTaskService : BaseService<EmployeeTask,EmployeeTaskDto> , IEmployeeTaskService
     {
-        public EmployeeTaskService(IBaseRepository<EmployeeTask> _repository, IMapper mapper, AbstractValidator<EmployeeTaskDto> validator) : base(_repository, mapper, validator)
+        public EmployeeTaskService(IBaseRepository<EmployeeTask> _repository, IMapper mapper, IValidator<EmployeeTaskDto> validator) : base(_repository, mapper, validator)
         {
 
         }
