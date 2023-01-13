@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ToDoCompany.Model.Migrations
 {
-    public partial class initialv1 : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -53,6 +53,11 @@ namespace ToDoCompany.Model.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_Employee_IsDeleted",
+                table: "Employee",
+                column: "IsDeleted");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_EmployeeTask_EmployeeId",
                 table: "EmployeeTask",
                 column: "EmployeeId");
@@ -61,6 +66,11 @@ namespace ToDoCompany.Model.Migrations
                 name: "IX_EmployeeTask_EmployeeIdInTask",
                 table: "EmployeeTask",
                 column: "EmployeeIdInTask");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_EmployeeTask_IsDeleted",
+                table: "EmployeeTask",
+                column: "IsDeleted");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

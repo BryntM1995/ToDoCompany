@@ -37,6 +37,8 @@ namespace ToDoCompany.Model.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("IsDeleted");
+
                     b.ToTable("Employee");
                 });
 
@@ -66,6 +68,8 @@ namespace ToDoCompany.Model.Migrations
                     b.HasIndex("EmployeeId");
 
                     b.HasIndex("EmployeeIdInTask");
+
+                    b.HasIndex("IsDeleted");
 
                     b.ToTable("EmployeeTask");
                 });

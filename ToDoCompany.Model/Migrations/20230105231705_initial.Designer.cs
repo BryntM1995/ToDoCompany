@@ -9,8 +9,8 @@ using ToDoCompany.Model.Context;
 namespace ToDoCompany.Model.Migrations
 {
     [DbContext(typeof(CompanyDbContext))]
-    [Migration("20221227233153_initialv1")]
-    partial class initialv1
+    [Migration("20230105231705_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -38,6 +38,8 @@ namespace ToDoCompany.Model.Migrations
                         .HasColumnType("tinyint(1)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("IsDeleted");
 
                     b.ToTable("Employee");
                 });
@@ -68,6 +70,8 @@ namespace ToDoCompany.Model.Migrations
                     b.HasIndex("EmployeeId");
 
                     b.HasIndex("EmployeeIdInTask");
+
+                    b.HasIndex("IsDeleted");
 
                     b.ToTable("EmployeeTask");
                 });
