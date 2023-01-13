@@ -11,6 +11,7 @@ using System;
 using ToDoCompany.Model.Context;
 using ToDoCompany.Model.Entities;
 using ToDoCompany.Repository;
+using ToDoCompany.Service;
 using ToDoCompany.Service.DTOs;
 using ToDoCompany.Service.FluentValidation;
 using ToDoCompany.Service.Mapper;
@@ -44,12 +45,15 @@ namespace ToDoCompany
             services.AddScoped<IBaseRepository<EmployeeTask>, EmployeeTaskRepository>();
             services.AddScoped<IValidator<EmployeeDto>, EmployeeValidation>();
             services.AddScoped<IValidator<EmployeeTaskDto>, EmployeeTaskValidation>();
+            services.AddScoped<IBaseService<EmployeeDto>, EmployeeService>();
+            services.AddScoped<IBaseService<EmployeeTaskDto>, EmployeeTaskService>();
             var mapperConfig = new MapperConfiguration(x =>
             {
                 x.AddProfile<EmployeeProfile>();
                 x.AddProfile<EmployeeTaskProfile>();
             });
             IMapper mapper = mapperConfig.CreateMapper();
+            services.AddSingleton(mapper);
             services.AddMvc();
 
         }

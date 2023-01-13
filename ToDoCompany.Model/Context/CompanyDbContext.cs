@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using System.Threading;
 using ToDoCompany.Model.Entities;
+using ToDoCompany.Model.Extension;
 
 namespace ToDoCompany.Model.Context
 {
@@ -22,6 +23,13 @@ namespace ToDoCompany.Model.Context
                 .HasMany<EmployeeTask>()
                 .WithOne(x => x.Employee)
                 .OnDelete(DeleteBehavior.Cascade);
+            foreach (var entityType in modelBuilder.Model.GetEntityTypes())
+            {
+                if (typeof(IBaseEntity).IsAssignableFrom(entityType.ClrType))
+                {
+                    entityType.AddSoftDeleteQueryFilter();
+                }
+            }
         }
     }
 }

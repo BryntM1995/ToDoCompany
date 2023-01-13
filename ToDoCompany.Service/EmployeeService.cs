@@ -19,9 +19,7 @@ namespace ToDoCompany.Service
         }
         private readonly IValidator<EmployeeDto> _validator;
         private readonly IMapper _mapper;
-       
-
-        public new IOperationResult Add(EmployeeDto dto)
+        public  IOperationResult AddEmployee(EmployeeDto dto)
         {
             var result = _validator.Validate(dto);
             if (!result.IsValid)
@@ -46,20 +44,20 @@ namespace ToDoCompany.Service
             _repository.Add(entity);
             return new OperationResult();
         }
-        public IEnumerable<EntityDto> GetAll()
+        public IEnumerable<EmployeeDto> GetAlleEmployees()
         {
-            var entitydtos = _mapper.Map<IEnumerable<EntityDto>>(_repository.GetAll());
+            var entitydtos = _mapper.Map<IEnumerable<EmployeeDto>>(_repository.GetAll());
             return entitydtos;
         }
 
-        public EntityDto GetById(int key)
+        public  EmployeeDto GeteEmployeeById(int key)
         {
             var entity = _repository.GetById(key);
-            var dto = _mapper.Map<EntityDto>(entity);
+            var dto = _mapper.Map<EmployeeDto>(entity);
             return dto;
         }
 
-        public IOperationResult Remove(int key)
+        public IOperationResult RemoveeEmployee(int key)
         {
 
             if (_repository.GetAll().Where(x => x.Id == key).Any())
@@ -77,7 +75,7 @@ namespace ToDoCompany.Service
             };
         }
 
-        public IOperationResult Update(EntityDto dto)
+        public IOperationResult UpdateEmployee(EmployeeDto dto)
         {
             var result = _validator.Validate(dto);
             if (!result.IsValid)

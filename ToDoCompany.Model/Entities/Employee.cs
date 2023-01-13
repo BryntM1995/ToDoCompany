@@ -8,6 +8,7 @@ namespace ToDoCompany.Model.Entities
 {
     public class Employee : BaseEntity
     {
+
         public string EmployeeName { get; set; }
         public string EmployeePhone { get; set; }
         public int EmployeeAge { get; set; }
